@@ -1,0 +1,41 @@
+version: '3.6'
+services:
+    db:
+        build:
+            context:  ./db
+            dockerfile: dockerfile
+        volumes:
+            - ./db/init_db.sql:/docker-entrypoint-initdb.d/1-init.sql
+            - pgdata:/var/lib/postgresql/data
+        # ports:
+        #     - "5432:5432"
+        expose:
+            - "5432"
+        environment:
+            POSTGRES_USER: deploy
+            POSTGRES_PASSWORD: deploy
+            POSTGRES_DB: dev_db
+    app:
+        build:
+            context:  ./app
+            dockerfile: dockerfile
+        expose:
+            - "5000"
+        links:
+            - db
+        depends_on:
+            - db
+        env_file:
+            - app/.shadow/env-vars
+    proxy:
+        build:
+            context:  ./nginx
+            dockerfile: dockerfile
+        ports:
+            - "80:80"
+        links:
+            - app
+        depends_on:
+            - app
+volumes:
+     pgdata:
