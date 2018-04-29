@@ -9,9 +9,9 @@ def create_app(config_mode='development'):
     app = Flask(__name__, template_folder='templates')
     app.config.from_object(app_config[config_mode])
 
-    from app.views.home.home import home_blueprint
+    from app.views.login import login_blueprint
 
-    app.register_blueprint(home_blueprint)
+    app.register_blueprint(login_blueprint)
 
     from .models import db
 
