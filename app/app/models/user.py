@@ -1,10 +1,13 @@
 from flask_sqlalchemy import SQLAlchemy
 from passlib.apps import custom_app_context as pwd_context
 from sqlalchemy.sql import func
+from flask_login import UserMixin
 
-db = SQLAlchemy()
 
-class User(db.Model):
+from . import db
+from app import login
+
+class User(UserMixin, db.Model):
     """User model."""
 
     __tablename__ = 'users'
@@ -15,7 +18,6 @@ class User(db.Model):
     username = db.Column(db.String(64),
                          index=True, nullable=False, unique=True)
     password_hash = db.Column(db.String(120), nullable=False)
-    active = db.Column(db.Boolean, index=True, nullable=False, default=True)
     created_at = db.Column(db.DateTime(timezone=True),
                            server_default=func.now())
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
@@ -36,3 +38,7 @@ class User(db.Model):
     def __repr__(self):
         """User representation."""
         return '<user %r>' % (self.username)
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))

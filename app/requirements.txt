@@ -4,6 +4,7 @@ Flask-Migrate
 flask-bootstrap
 flask-script
 flask-wtf
+flask-login
 psycopg2
 gunicorn
 passlib
