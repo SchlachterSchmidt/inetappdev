@@ -1,20 +1,16 @@
 from flask import render_template, redirect, make_response, Blueprint, url_for, flash
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, logout_user
 
 from ..models.user import User
 from ..forms.login import Login
 
-login_blueprint = Blueprint('login', __name__)
+session_blueprint = Blueprint('session', __name__)
 
-@login_blueprint.route('/hello')
-def hello():
-    return make_response('hello world', 200)
-
-@login_blueprint.route('/', methods=['GET', 'POST'])
-@login_blueprint.route('/login', methods=['GET', 'POST'])
+@session_blueprint.route('/', methods=['GET', 'POST'])
+@session_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('home.home'))
     login_form = Login()
     if login_form.validate_on_submit():
         # debug
@@ -26,5 +22,11 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('.login'))
         login_user(user, remember=login_form.remember_me.data)
-        return redirect(url_for('profile.profile'))
+        return redirect(url_for('home.home'))
     return render_template('login.html', title='Sign In', form=login_form)
+
+
+@session_blueprint.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('.login'))

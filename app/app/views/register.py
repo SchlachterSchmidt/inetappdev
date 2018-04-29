@@ -19,5 +19,5 @@ def register():
         user.hash_password(register_form.password.data)
         user.save()
         flash('Congratulations, you are now a registered user!')
-        return redirect(url_for('login.login'))
+        return redirect(url_for('session.login'))
     return render_template('register.html', title='Register', form=register_form)

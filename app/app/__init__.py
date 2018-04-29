@@ -14,12 +14,12 @@ def create_app(config_mode='development'):
     app.config.from_object(app_config[config_mode])
 
     # register blueprints
-    from app.views.login import login_blueprint
-    from app.views.profile import profile_blueprint
+    from app.views.session import session_blueprint
+    from app.views.home import home_blueprint
     from app.views.register import blueprint_register
 
-    app.register_blueprint(login_blueprint)
-    app.register_blueprint(profile_blueprint)
+    app.register_blueprint(session_blueprint)
+    app.register_blueprint(home_blueprint)
     app.register_blueprint(blueprint_register)
 
     # register app with SQLAlchemy
@@ -31,6 +31,7 @@ def create_app(config_mode='development'):
     bootstrap = Bootstrap(app)
     # register login manager extension
     login.init_app(app)
+    login.login_view = 'session.login'
 
     if config_mode == 'development':
         print(app.config)

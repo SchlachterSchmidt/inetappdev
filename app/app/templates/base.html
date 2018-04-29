@@ -6,8 +6,15 @@
 
 {% block navbar %}
     <nav class="navbar navbar-default">
-        </br>
-        </br>
+        <div>
+               Microblog:
+               <a href="{{ url_for('home.home') }}">Home</a>
+               {% if current_user.is_anonymous %}
+               <a href="{{ url_for('session.login') }}">Login</a>
+               {% else %}
+               <a href="{{ url_for('session.logout') }}">Logout</a>
+               {% endif %}
+           </div>
     </nav>
 {% endblock %}
 
