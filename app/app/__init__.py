@@ -15,7 +15,12 @@ def create_app(config_mode='development'):
 
     # register blueprints
     from app.views.login import login_blueprint
+    from app.views.profile import profile_blueprint
+    from app.views.register import blueprint_register
+
     app.register_blueprint(login_blueprint)
+    app.register_blueprint(profile_blueprint)
+    app.register_blueprint(blueprint_register)
 
     # register app with SQLAlchemy
     from .models import db
