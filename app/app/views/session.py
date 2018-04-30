@@ -1,5 +1,6 @@
 from flask import render_template, redirect, make_response, Blueprint, url_for, flash
 from flask_login import current_user, login_user, logout_user
+from datetime import datetime
 
 from ..models.user import User
 from ..forms.login import Login
@@ -30,3 +31,10 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('.login'))
+
+
+@session_blueprint.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        current_user.save()
