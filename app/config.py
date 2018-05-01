@@ -13,12 +13,14 @@ class Config(object):
 class DevConfig(Config):
     """Config class for dev environment."""
     SQLALCHEMY_DATABASE_URI = os.environ['DEV_DATABASE_URL']
+    POSTS_PER_PAGE = 3
 
 class PrdConfig(Config):
     """Config class for prod environment."""
     DEBUG = False
     TESTING = False
     SQLALCHEMY_DATABASE_URI = os.environ['PRD_DATABASE_URL']
+    POSTS_PER_PAGE = 50
 
 app_config = {
     'development': DevConfig,
