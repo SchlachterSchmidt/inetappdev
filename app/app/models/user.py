@@ -7,6 +7,7 @@ from hashlib import md5
 
 from . import db
 from .followers import followers
+from .post import Post
 from app import login
 
 class User(UserMixin, db.Model):
@@ -31,6 +32,7 @@ class User(UserMixin, db.Model):
         primaryjoin=(followers.c.follower_id == id),
         secondaryjoin=(followers.c.followed_id == id),
         backref=db.backref('followers', lazy='dynamic'), lazy='dynamic')
+    posts = db.relationship('Post', backref='author', lazy='dynamic')
 
 
     def hash_password(self, password):
