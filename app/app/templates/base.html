@@ -10,10 +10,11 @@
                Microblog:
                <a href="{{ url_for('home.home') }}">Home</a>
                {% if current_user.is_anonymous %}
-               <a href="{{ url_for('session.login') }}">Login</a>
+                    <a href="{{ url_for('session.login') }}">Login</a>
                {% else %}
-               <a href="{{ url_for('profile.profile', username=current_user.username) }}">Profile</a>
-               <a href="{{ url_for('session.logout') }}">Logout</a>
+                    <a href="{{ url_for('profile.profile', username=current_user.username) }}">Profile</a>
+                    <a href="{{ url_for('joystream.joystream') }}">The Joystream</a>
+                    <a href="{{ url_for('session.logout') }}">Logout</a>
                {% endif %}
            </div>
     </nav>

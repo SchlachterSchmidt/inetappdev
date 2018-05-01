@@ -18,13 +18,16 @@ def create_app(config_mode='development'):
     from app.views.home import home_blueprint
     from app.views.register import blueprint_register
     from app.views.profile import profile_blueprint
+    from app.views.joystream import joystream_blueprint
     # TODO: not working
     from app.views.errors import errors_blueprint
+
 
     app.register_blueprint(session_blueprint)
     app.register_blueprint(home_blueprint)
     app.register_blueprint(blueprint_register)
     app.register_blueprint(profile_blueprint)
+    app.register_blueprint(joystream_blueprint)
     # TODO: not working
     app.register_blueprint(errors_blueprint)
 
