@@ -1,0 +1,25 @@
+#main_body {
+	background: linear-gradient(rgba(135,206,250 ,0.8), rgba(240,248,255, 0.8)), url('http://bit.ly/2fBj6OJ') 0% 0%/cover
+}
+.fill-viewport {
+	min-height: 100vh
+}
+.text-white-70 {
+	color: rgba(255,255,255,0.7)
+}
+.table-borderless > tbody > tr > td,
+.table-borderless > tbody > tr > th,
+.table-borderless > tfoot > tr > td,
+.table-borderless > tfoot > tr > th,
+.table-borderless > thead > tr > td,
+.table-borderless > thead > tr > th {
+    border: none;
+}
+.table-hover tr:hover td, .table-hover tr:hover th {
+  background-color: #b3e0ff
+}
+.table-white {
+    background-color: #ffffff
+}
+
+.top-buffer { margin-top:20px; }

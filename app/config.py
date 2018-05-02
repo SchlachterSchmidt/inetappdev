@@ -9,11 +9,14 @@ class Config(object):
     CSRF_ENABLED = True
     SECRET_KEY = os.environ['SECRET_KEY']
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    POSTS_PER_PAGE = 3
 
 class DevConfig(Config):
     """Config class for dev environment."""
     SQLALCHEMY_DATABASE_URI = os.environ['DEV_DATABASE_URL']
-    POSTS_PER_PAGE = 3
+
+class LocalConfig(Config):
+    SQLALCHEMY_DATABASE_URI = 'sqlite://'
 
 class PrdConfig(Config):
     """Config class for prod environment."""
@@ -22,7 +25,9 @@ class PrdConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ['PRD_DATABASE_URL']
     POSTS_PER_PAGE = 50
 
+
 app_config = {
     'development': DevConfig,
     'production': PrdConfig,
+    'local': LocalConfig
 }

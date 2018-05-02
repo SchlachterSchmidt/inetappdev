@@ -42,7 +42,7 @@ def create_app(config_mode='development'):
     login.init_app(app)
     login.login_view = 'session.login'
 
-    if config_mode == 'development':
-        print(app.config)
+    if config_mode == 'local':
+        db.create_all()
 
     return app

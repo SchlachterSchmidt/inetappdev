@@ -1,36 +1,57 @@
 {% extends 'bootstrap/base.html' %}
 
+{% block styles %}
+    {{super()}}
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{url_for('static', filename='menu.js')}}"></script>
+{% endblock %}
+
 {% block title %}
     {% if title %}{{ title }} - Microblog{% else %}Welcome to Microblog{% endif %}
 {% endblock %}
 
-{% block navbar %}
-    <nav class="navbar navbar-default">
-        <div>
-               Microblog:
-               <a href="{{ url_for('home.home') }}">Home</a>
-               {% if current_user.is_anonymous %}
-                    <a href="{{ url_for('session.login') }}">Login</a>
-               {% else %}
-                    <a href="{{ url_for('profile.profile', username=current_user.username) }}">Profile</a>
-                    <a href="{{ url_for('joystream.joystream') }}">The Joystream</a>
-                    <a href="{{ url_for('session.logout') }}">Logout</a>
-               {% endif %}
-           </div>
-    </nav>
-{% endblock %}
+{% block body %}
+<section id="main_body">
+    <div class="container fill-viewport align-items-center">
+        {% block navbar %}
+            <nav class="navbar navbar-inverse menu">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand">The Joystream</a>
+                </div>
 
-{% block content %}
-    <div class="container">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-info" role="alert">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-        {% endwith %}
+                <ul class="nav navbar-nav">
+                  <li><a href="{{ url_for('home.home') }}">Home</a></li>
+                  {% if current_user.is_anonymous %}
+                       <li><a href="{{ url_for('session.login') }}">Login</a></li>
+                  {% else %}
+                       <li><a href="{{ url_for('profile.profile', username=current_user.username) }}">Profile</a></li>
+                       <li><a href="{{ url_for('joystream.joystream') }}">The Joystream</a></li>
+                       <li><a href="{{ url_for('session.logout') }}">Logout</a></li>
+                  {% endif %}
+                </ul>
+              </div>
+            </nav>
+        {% endblock %}
+        {% block content %}
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            {% endwith %}
 
-        {# application content needs to be provided in the app_content block #}
-        {% block app_content %}{% endblock %}
+                {# sub-template is inserted here: #}
+                {% block app_content %}
+                {% endblock %}
+        {% endblock %}
     </div>
+</section>
 {% endblock %}

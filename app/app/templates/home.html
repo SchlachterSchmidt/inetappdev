@@ -1,25 +1,28 @@
 {% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
-{% block content %}
+{% block app_content %}
     <h1>Hi, {{ current_user.username }}!</h1>
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.post.label }}<br>
-            {{ form.post(cols=32, rows=4) }}<br>
-            {% for error in form.post.errors %}
-            <span style="color: red;">[{{ error }}]</span>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-md-12">
+        {% if posts %}
+            {% for post in posts %}
+                {% include 'post.html' %}
             {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
-    {% for post in posts %}
-        {% include 'post.html' %}
-    {% endfor %}
-    {% if prev_url %}
-        <a href="{{ prev_url }}">Newer posts</a>
-    {% endif %}
-    {% if next_url %}
-        <a href="{{ next_url }}">Older posts</a>
-    {% endif %}
+            {% if prev_url %}
+                <a href="{{ prev_url }}">Newer posts</a>
+            {% endif %}
+            {% if next_url %}
+                <a href="{{ next_url }}">Older posts</a>
+            {% endif %}
+        {% else %}
+            <p>Pretty empty here. Why dont you have a look <a href="{{ url_for('joystream.joystream') }}">around</a></p>
+        {% endif %}
+        </div>
+    </div>
 {% endblock %}
