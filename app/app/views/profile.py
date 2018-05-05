@@ -49,18 +49,20 @@ def edit_profile():
 def follow(username):
     user = User.query.filter_by(username=username).first()
     if user is None or user == current_user:
-        flash('There was a problem.'.format(username))
+        flash('There was a problem following {}.'.format(username))
         return redirect(url_for('.profile', username=current_user.username))
     current_user.follow(user)
     db.session.commit()
     flash('You are following {}!'.format(username))
     return redirect(url_for('.profile', username=username))
 
+
 @profile_blueprint.route('/profile/<username>/unfollow')
 @login_required
 def unfollow(username):
     user = User.query.filter_by(username=username).first()
     if user is None or user == current_user:
+        flash('There was a problem unfollowing {}.'.format(username))
         return redirect(url_for('.profile', username=current_user.username))
     current_user.unfollow(user)
     db.session.commit()

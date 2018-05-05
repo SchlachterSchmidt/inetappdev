@@ -1,6 +1,6 @@
-from flask import render_template, redirect, make_response, Blueprint, url_for, flash
-from flask_login import current_user, login_user, logout_user
 from datetime import datetime
+from flask import render_template, redirect, Blueprint, url_for, flash
+from flask_login import current_user, login_user, logout_user
 
 from ..models.user import User
 from ..forms.login import Login
@@ -14,10 +14,6 @@ def login():
         return redirect(url_for('home.home'))
     login_form = Login()
     if login_form.validate_on_submit():
-        # debug
-        print('Login requested for user {}, remember_me={}'.format(
-            login_form.username.data, login_form.remember_me.data))
-
         user = User.query.filter_by(username=login_form.username.data).first()
         if user is None or not user.verify_password(login_form.password.data):
             flash('Invalid username or password')

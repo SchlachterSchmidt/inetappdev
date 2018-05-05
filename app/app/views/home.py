@@ -1,4 +1,4 @@
-from flask import render_template, redirect, make_response, Blueprint, url_for, flash, request
+from flask import render_template, redirect, Blueprint, url_for, flash, request
 from flask_login import login_required, current_user
 
 from flask import current_app as app
@@ -12,7 +12,6 @@ home_blueprint = Blueprint('home', __name__)
 @home_blueprint.route('/home', methods=['GET', 'POST'])
 @login_required
 def home():
-
     form = PostForm()
     if form.validate_on_submit():
         post = PostModel(body=form.post.data, author=current_user)
