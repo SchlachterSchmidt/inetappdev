@@ -1,3 +1,5 @@
+"""App factory returns app instance"""
+
 from flask import Flask
 from config import app_config
 from flask_bootstrap import Bootstrap
@@ -20,7 +22,7 @@ def create_app(config_mode='development'):
     from app.views.profile import profile_blueprint
     from app.views.joystream import joystream_blueprint
     # TODO: not working
-    from app.views.errors import errors_blueprint
+    # from app.views.errors import errors_blueprint
 
 
     app.register_blueprint(session_blueprint)
@@ -29,7 +31,7 @@ def create_app(config_mode='development'):
     app.register_blueprint(profile_blueprint)
     app.register_blueprint(joystream_blueprint)
     # TODO: not working
-    app.register_blueprint(errors_blueprint)
+    # app.register_blueprint(errors_blueprint)
 
     # register app with SQLAlchemy
     from .models import db
@@ -42,7 +44,9 @@ def create_app(config_mode='development'):
     login.init_app(app)
     login.login_view = 'session.login'
 
+    # if config is 'local' use the flask in built sqlite db and init schema
     if config_mode == 'local':
         db.create_all()
 
+    print(config_mode)
     return app
