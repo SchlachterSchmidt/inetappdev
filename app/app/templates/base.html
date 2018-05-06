@@ -5,9 +5,11 @@
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 {% endblock %}
 
-{% block scripts %}
-    {{ super() }}
-    <script src="{{url_for('static', filename='menu.js')}}"></script>
+{% block head %}
+    {{super()}}
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='menu.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='notification.js')}}"></script>
 {% endblock %}
 
 {% block title %}
@@ -23,8 +25,7 @@
                 <div class="navbar-header">
                   <a class="navbar-brand">The Joystream</a>
                 </div>
-
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav menu">
                   <li><a href="{{ url_for('home.home') }}">Home</a></li>
                   {% if current_user.is_anonymous %}
                        <li><a href="{{ url_for('session.login') }}">Login</a></li>
@@ -40,14 +41,13 @@
         {% block content %}
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
-                <ul>
+                <div class="message">
                     {% for message in messages %}
-                        <li>{{ message }}</li>
+                        {{ message }}
                     {% endfor %}
-                </ul>
+                </div>
                 {% endif %}
             {% endwith %}
-
                 {# sub-template is inserted here: #}
                 {% block app_content %}
                 {% endblock %}
