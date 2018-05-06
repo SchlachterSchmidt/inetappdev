@@ -6,7 +6,7 @@ from flask_script import Manager
 from app import create_app
 from app.models import db
 
-app = create_app(config_mode='production')
+app = create_app(config_mode='development')
 
 migrate = Migrate(app, db)
 manager = Manager(app)

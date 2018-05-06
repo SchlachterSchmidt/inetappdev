@@ -2,7 +2,7 @@ insert into users(firstname, lastname, email, username, password_hash, created_a
     values
     ('Hans', 'Gruber', 'hans.gruber@nakatomi.com', 'hans', '$6$rounds=656000$MjyyCNgD39HJrbnK$ijz6hNLIWDQPsQkM.aGkWBvvx5N6i3zD0gdPzfpeGz2RNO8xCw9MRPbjplk//OuI0qx1VQneLWnBQ.A2Xfup.0', NOW(), NOW(), 'i hate John McClane', NOW()),
     ('Simon', 'Gruber', 'simon.gruber@nyfr.com', 'simon', '$6$rounds=656000$OBUey4BeZjwQG2Yb$4LJrIexa.uU8dvswbW9B7lLy5XniCxQJlcEIMXUnEya6wx/Gq37/V6Z6hS5kNf2OidYBARkdjY7a3iMAaNh0Q0', NOW(), NOW(), 'Birds of a feather, flock together, so do pigs and swine. Rats and mice all have their chance, as will I have mine', NOW()),
-    ('John', 'McClane', 'john.mcclane@nypd', 'johnboy', '$6$rounds=656000$KtgmndKI6o0JunCT$f3etnFgLbGR16jXWboWjwnfRF2gG6xxnBOLKHvNclbWgZEw2sCQjPjVkWMJLOevK2k.7/3huvgxTSgu2Py48B0', NOW(), NOW(), 'yippiekayay...', NOW())
+    ('John', 'McClane', 'john.mcclane@nypd', 'johnboy', '$6$rounds=656000$KtgmndKI6o0JunCT$f3etnFgLbGR16jXWboWjwnfRF2gG6xxnBOLKHvNclbWgZEw2sCQjPjVkWMJLOevK2k.7/3huvgxTSgu2Py48B0', NOW(), NOW(), 'yippiekayay...', NOW()),
     ('Holly', 'Gennero', 'holly.gennero@nakatomi.com', 'holly', '$6$rounds=656000$10.6XScywDDO3AsT$oiwlxIdCKgtFUQ3sGJ.kELdMxaXgZrPJj8r718Gb5esmHsTRR81ZBnOQEIH5prYps6ZRWYOU1o0XoP3wNVTej/', NOW(), NOW(), null, null);
 
 insert into followers(follower_id, followed_id)
